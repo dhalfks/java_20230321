@@ -1,0 +1,20 @@
+package day15;
+
+public class StringBufferEx {
+
+	public static void main(String[] args) {
+		// String 객체 : 문자열을 표현
+		// StringBuffer : 문자열을 추가하거나, 변경할때 주로 사용하는 객체
+		// append : 문자열 추가 끝에추가
+		// insert : 특정 위치에 문자열 추가
+		
+		StringBuffer sb = new StringBuffer();
+		sb.append("hello");
+		sb.append(" ");
+		sb.append("java");
+		System.out.println(sb);
+		
+
+	}
+
+}

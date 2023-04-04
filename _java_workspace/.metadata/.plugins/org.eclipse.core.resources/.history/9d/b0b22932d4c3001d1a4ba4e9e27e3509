@@ -1,0 +1,13 @@
+package day15;
+
+import java.util.Scanner;
+
+public class WordMain {
+
+	public static void main(String[] args) {
+		
+		Scanner scan = new Scanner(System.in);
+		
+	}
+
+}

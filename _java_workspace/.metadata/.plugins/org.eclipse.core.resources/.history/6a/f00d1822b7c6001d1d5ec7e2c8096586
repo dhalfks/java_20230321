@@ -1,0 +1,12 @@
+package day17;
+
+public class IOStreamEx {
+
+	public static void main(String[] args) {
+		/* 자바는 입력스트림, 출력스트림을 통해 데이터를 입출력한다.
+		 * 스트림 : 단방향으로 데이터가 흘러가는 형태
+		 * */
+
+	}
+
+}

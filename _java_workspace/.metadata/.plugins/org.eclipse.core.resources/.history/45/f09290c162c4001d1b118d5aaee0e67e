@@ -1,0 +1,28 @@
+package day16;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+
+public class EnglishDictionary {
+
+}
+
+class Dictionary{
+	ArrayList<Word> dic = new ArrayList<>();
+}
+
+class Word{
+	//hello : 안녕, 아침인사, 반가움, 비슷한말 hi
+	private Map<String, ArrayList<String>> words = new HashMap<>();
+	
+	/* y를 입력하면 단어를 입력, n을 입력하면 종료
+	 * 단어가 이미 있다면 '이미 있는 단어입니다.' 등록 금지
+	 * 메서드명 : makeWord
+	 * */
+	
+	/* 단어 출력 메서드
+	 * 
+	 * */
+	
+}

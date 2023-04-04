@@ -1,0 +1,18 @@
+package day17;
+
+import java.io.File;
+
+public class FileObjectEx01 {
+
+	public static void main(String[] args) {
+		// 파일이 가지고 있는 정보를 출력.
+		// D:\_java_workspace\java_workspace\out.txt
+		File f = new File("D:\\_java_workspace\\java_workspace\\out.txt");
+		String fileName = f.getName();
+		System.out.println(fileName); //경로를 제외한 파일이름
+		System.out.println(f.getPath()); //경로
+		
+
+	}
+
+}

@@ -1,0 +1,123 @@
+update attend set at_mid=40, at_final=40, at_attend=10, at_hw=9
+where at_num in (1,9,15);
+update attend set at_mid=38, at_final=35, at_attend=8, at_hw=7
+where at_num in (2,4,10);
+update attend set at_mid=30, at_final=28, at_attend=5, at_hw=7
+where at_num in (3,11,20, 25, 27);
+update attend set at_mid=28, at_final=25, at_attend=6, at_hw=10
+where at_num in (5,6,12,21,19);
+update attend set at_mid=12, at_final=20, at_attend=2, at_hw=6
+where at_num in (7,16,24);
+update attend set at_mid=35, at_final=38, at_attend=9, at_hw=8
+where at_num in (14, 17, 18, 23, 26);
+
+update attend set at_score = 
+case
+when (at_mid+at_final+at_attend+at_hw) >= 90 then 'A'
+when (at_mid+at_final+at_attend+at_hw) >= 80 then 'B'
+when (at_mid+at_final+at_attend+at_hw) >= 70 then 'C'
+when (at_mid+at_final+at_attend+at_hw) >= 60 then 'D'
+else 'F'
+end;
+
+update attend set at_pass = 
+if(at_score='A' or at_score='B' ,'p','f');
+
+alter table attend modify column at_pass varchar(1) default 'f';
+
+update attend set at_repetition = 
+if(at_score='F' or at_attend <=3, 'y','n');
+
+select if(su_title = '대학수학',concat(su_title,'(',co_term,')'), su_title) as '김영철 수강과목' from attend
+join student on at_st_num = st_num
+join course on at_co_num = co_num
+join subject on co_su_num = su_num
+where st_name ='김영철';
+
+
+
+select concat(su_title,'(',co_term,')') as '김영철수강과목' from attend
+join student on at_st_num = st_num
+join course on at_co_num = co_num
+join subject on co_su_num = su_num
+where st_name ='김영철';
+
+select st_name, gu_year  from guide
+join student on gu_st_num = st_num
+join professor on gu_pr_num = pr_num
+where pr_name='강길동';
+
+select distinct st_name as '대학수학수강자명단' from attend
+join student on at_st_num = st_num
+join course on at_co_num = co_num
+join subject on co_su_num = su_num
+where su_title='대학수학'
+order by st_name;
+
+create view 1term_view as
+select s.st_num, s.st_name, b.su_title
+from student as s, course as c, subject as b
+where c.co_term = 1;
+
+create or replace view 1term_view as
+select  distinct s.st_num, s.st_name from
+student as s, course as c
+where c.co_term =1;
+
+
+create or replace view 1term_view as
+select  distinct st_num, st_name from
+student, course 
+where co_term =1;
+
+create or replace view 1term_view as
+select s.st_num, s.st_name, group_concat(distinct b.su_title) from
+student as s, course as c, subject as b
+where c.co_term = 1
+group by s.st_num, s.st_name;
+
+
+--수정
+create or replace view 1term_view as
+select s.st_num, s.st_name, b.su_title
+from student as s, course as c, subject as b
+where c.co_term = 1;
+
+
+drop trigger if exists insert_buy;
+delimiter // 
+create trigger insert_buy after insert on buy
+for each row
+begin
+declare _amount int default 0;
+set _amount = new.amount;
+update product set
+amount = amount - _amount,
+sale_amount = sale_amount + _amount
+where name = new.product_name;
+end//
+delimiter ;
+
+drop trigger if exists delete_buy;
+delimiter //
+create trigger delete_buy after delete on buy
+for each row
+begin
+declare _amount int default 0;
+set _amount = old.amount;
+update product set
+amount = amount + _amount,
+sale_amount = sale_amount - _amount
+where name = old.product_name;
+end//
+delimiter ;
+
+
+
+
+
+
+
+
+
+

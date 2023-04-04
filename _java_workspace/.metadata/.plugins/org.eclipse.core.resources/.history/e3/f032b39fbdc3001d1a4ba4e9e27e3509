@@ -1,0 +1,13 @@
+package day15;
+
+/* 제네릭 : 결정되지 않은 파라미터를 처리할때
+ * 실제 객체를 사용할 때 파리미터 타입을 결정 대체
+ * <T> <K><V>
+ * menu, price
+ * */
+public class Sale<K,V> {
+	
+	//멤버변수 선언 menu, price
+	private K menu;
+	private V price;
+}

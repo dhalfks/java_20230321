@@ -1,0 +1,33 @@
+package day17;
+
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.HashMap;
+
+public class BufferedReaderEx01 {
+
+	public static void main(String[] args) throws IOException {
+		/* BufferedReader : 문자 보조 스트림
+		 * 라인단위로 읽기가 가능
+		 * 더이상 읽을 라인이 없을경우 null을 리턴
+		 * 보조스트림: 직접 읽고쓰는 기능이 없음. 
+		 * 보조스트림을 사용할 경우 생성자에 기반스트림을 매개변수로 포함.
+		 * */
+		BufferedReader br = 
+				new BufferedReader(new FileReader("out.txt"));
+		HashMap<String,Integer> map = new HashMap<>();
+		while(true) {
+			String line = br.readLine(); //한라인씩 읽어들임.
+			if(line == null) {  //더이상 읽을 라인이 없을경우
+				break;  //반복문 빠져나감.
+			}
+			System.out.println(line);
+			String name = line.substring(0, line.indexOf(" "));
+			int score = Integer.parseInt(line.substring(line.indexOf(" ")+1));
+			System.out.println(name+":"+score);
+		}
+		br.close();
+	}
+
+}

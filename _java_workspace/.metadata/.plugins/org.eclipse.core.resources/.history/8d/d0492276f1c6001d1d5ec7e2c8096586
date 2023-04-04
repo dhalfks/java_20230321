@@ -1,0 +1,21 @@
+package day17;
+
+import java.util.Scanner;
+
+public class WordMain {
+
+	public static void main(String[] args) {
+		Scanner scan = new Scanner(System.in);
+		
+		int menu = -1;
+		do {
+			
+			
+			
+		}while(menu != 7);
+		System.out.println("프로그램 종료~!!");
+		scan.close();
+
+	}
+
+}

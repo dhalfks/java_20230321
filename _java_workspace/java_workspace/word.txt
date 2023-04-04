@@ -1,0 +1,8 @@
+단어장
+apple : 사과
+banana : 바나나
+cat : 고양이
+dog : 강아지
+hello : 안녕
+hi : 안녕
+orange : 오렌지

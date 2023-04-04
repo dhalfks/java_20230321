@@ -1,0 +1,13 @@
+package day17;
+
+public class BufferedReaderEx03 {
+
+	public static void main(String[] args) {
+		/* out.txt파일을 읽어들여 map에 저장 후 
+		 * 이름:점수 
+		 * 총 합계 총인원 출력
+		 * */
+
+	}
+
+}

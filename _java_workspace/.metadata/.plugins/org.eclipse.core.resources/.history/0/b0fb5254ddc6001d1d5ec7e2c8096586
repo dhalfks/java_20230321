@@ -1,0 +1,13 @@
+package day17;
+
+public class BufferedReaderEx02 {
+
+	public static void main(String[] args) {
+		/* BufferedReader, PrintWriter
+		 * 파일을 읽어들여 복사하여 객체생성
+		 * out.txt에서 파일을 읽어서 => out2.txt로 쓰기
+		 * */
+
+	}
+
+}

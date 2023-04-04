@@ -1,0 +1,14 @@
+package day17;
+
+import java.io.FileInputStream;
+
+public class InputStreamEx01 {
+
+	public static void main(String[] args) {
+		// FileInputStream : 바이트 단위 기반 스트림
+		byte[] b = new byte[1024];
+		FileInputStream input = new FileInputStream("out.txt");
+
+	}
+
+}

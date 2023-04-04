@@ -1,0 +1,8 @@
+package day15;
+
+import java.util.ArrayList;
+
+public class SaleManager {
+
+	private ArrayList<Sale> product = new ArrayList<>();
+}

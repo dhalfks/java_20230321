@@ -1,0 +1,20 @@
+package day18;
+
+class MyThread2 implements Runnable{
+
+	@Override
+	public void run() {
+		// 반드시 run() 메서드를 구현해야 함.
+		
+	}
+	
+}
+
+public class ThreadEx02 {
+
+	public static void main(String[] args) {
+		// Runnable을 구현하는 방법
+
+	}
+
+}

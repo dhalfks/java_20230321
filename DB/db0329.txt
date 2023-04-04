@@ -1,0 +1,111 @@
+select co_name as '과목', sum(at_mid) as'중간', sum(at_final)as'기말',
+sum(at_attend)as'출석',sum(at_hw)as'과제' 
+from attend
+join course on at_co_code = co_code
+group by co_name
+order by co_name;
+
+select * from attend join course on at_co_code = co_code;
+
+테이블명.칼럼명   c.name
+
+select at_score as'학점', sum(at_mid) as'중간', sum(at_final)as'기말',
+sum(at_attend)as'출석',sum(at_hw)as'과제' 
+from attend
+where at_score is not null
+group by at_score
+order by at_score;
+
+select co_name as'과목명', co_professor as'교수명' from attend
+join course on at_co_code = co_code
+join student on at_std_num = std_num
+where std_name='강철수'
+order by co_name;
+
+auto_increment 속성 추가 칼럼
+gu_num(지도), co_num(강의), su_num(과목), at_num(수강)
+
+
+1. 외래키 테이블 락 걸기
+LOCK TABLES course WRITE, attend WRITE;
+
+2. 외래키 지우기
+ALTER TABLE attend DROP FOREIGN KEY attend_ibfk_2;
+
+3. 속성 넣기(auto_increment) => DESC로 확인하기
+ALTER TABLE course MODIFY co_num int not null auto_increment;
+
+4. 외래키 설정
+ALTER TABLE attend ADD FOREIGN KEY(at_co_num) references course(co_num); 
+
+5. 락 해제
+unlock tables;
+
+alter table course modify co_num int not null auto_increment;
+
+
+attend (수강테이블)
+
+insert into attend(at_st_num, at_co_num) values
+(2020123001,1),
+(2020123001,2),
+(2020123001,3),
+(2020123001,4),
+(2020123001,5),
+(2020123001,6),
+(2020123002,1),
+(2020123002,2),
+(2020123002,3),
+(2020123002,4),
+(2020160001,1),
+(2020160001,2),
+(2020160001,3),
+(2020160001,4),
+(2020160001,5),
+(2020160001,6),
+(2020160002,1),
+(2020160002,2),
+(2020160002,3),
+(2020160002,4),
+(2020160002,5),
+(2020160002,6),
+(2020456001,1),
+(2020456001,2),
+(2020456001,3),
+(2020456001,4),
+(2020456001,5);
+
+insert into student(st_num, st_name,st_term) values
+(2020123001,'김영철',2),
+(2020123002,'나영희',2),
+(2020160001,'강철수',2),
+(2020160002,'박철수',2),
+(2020456001,'강군',2);
+
+insert into subject values
+(1,'msc001','대학수학',3,3),
+(2,'com001','컴퓨터개론',2,2),
+(3,'com002','운영체제',3,3),
+(4,'abc001','글쓰기',2,2),
+(5,'abc002','영어',2,3);
+
+insert into professor values
+(2005789001, '홍길동',60,'B동302호','재직','정교수'),
+(2006456001, '박영실',60,'B동301호','안식년','정교수'),
+(2010160001, '강길동',55,'A동202호','재직','조교수'),
+(2011123001, '이순신',55,'A동203호','재직','조교수');
+
+insert into course(co_pr_num, co_su_num, co_term, co_year, co_timetable) values
+(2005789001,1,1,2002,'월2a/2b/3a/3b/4a/4b'),
+(2005789001,1,2,2002,'월2a/2b/3a/3b/4a/4b'),
+(2010160001,2,1,2002,'화1a/1b/2a/2b'),
+(2010160001,3,1,2002,'목2a/2b/3a/3b/4a/4b'),
+(2011123001,4,2,2002,'화1a/1b/2a/2b'),
+(2011123001,5,2,2002,'수1a/1b/2a/2b');
+
+insert into guide(gu_pr_num, gu_st_num, gu_year) values
+(2010160001,2020160001,2020),
+(2010160001,2020160002,2020),
+(2011123001,2020123001,2020),
+(2011123001,2020123002,2020),
+(2006456001,2020456001,2020);

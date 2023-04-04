@@ -1,0 +1,161 @@
+alter table course add co_degree int default 0;
+
+update course set co_degree = (
+select count(at_co_code) from attend
+where at_co_code = co_code
+group by at_co_code);
+
+delimiter //
+create trigger insert_attend after insert on attend
+for each row
+begin
+update course set co_degree = co_degree+1
+where co_code = new.at_co_code;
+end//
+delimiter ;
+
+new. : 아직 생성되지 않았지만 앞으로 들어갈 값
+insert(new), update(old, new), delete(old)
+
+insert into attend(at_std_num, at_co_code, at_year, at_term)
+values('2020123020', '20201ipc001',2023,2);
+
+drop trigger if exists update_attend;
+delimiter //
+create trigger update_attend after update on attend
+for each row
+begin
+update course set co_degree =(
+case 
+when co_code = new.at_co_code then co_degree+1
+when co_code = old.at_co_code then co_degree-1
+else co_degree
+end);
+end//
+delimiter ;
+
+
+
+update course set co_degree = co_degree-1
+where co_code = old.at_co_code;
+
+update attend set at_co_code = '20202ipc002'
+where at_num = 24;
+
+drop procedure if exists select_buy;
+delimiter //
+create procedure select_buy(
+in in_product_name varchar(45)
+)
+begin
+select customer from buy 
+where product_name = in_product_name;
+end//
+delimiter ;
+
+call select_buy('폴라티셔츠');
+
+drop procedure if exists delete_buy;
+delimiter //
+create procedure delete_buy(
+in in_product_name varchar(45),
+
+)
+begin
+delete from buy where product_name = in_product_name;
+select * from buy;
+end//
+delimiter ;
+
+call delete_buy('폴라티셔츠');
+
+프로시저 내용 확인
+SHOW CREATE PROCEDURE 저장_프로시저_이름;
+
+프로시저 목록 확인(db전체 목록확인)  
+show prodedure status;
+//shop db 에서만 목록확인
+show prodedure status where db = 'shop'; 
+
+SHOW CREATE PROCEDURE delete_buy;
+
+//트리거 때문에 error
+drop procedure if exists insert_buy1;
+delimiter //
+create procedure insert_buy1(
+in in_num int,
+in in_name varchar(20),
+in in_amount int
+)
+begin
+insert into buy(customer, product_name, price, amount)
+select in_name, name, price, in_amount from product 
+where num = in_num;
+update buy set total = price * amount;
+select * from buy;
+end//
+delimiter ;
+
+
+drop procedure if exists insert_buy;
+delimiter //
+create procedure insert_buy(
+in in_num int,
+in in_customer varchar(20),
+in in_amount int
+)
+begin
+declare _name varchar(45);
+declare _price int;
+declare _total int;
+select name, price into _name, _price from product
+where num = in_num;
+set _total = _price * in_amount;
+insert into buy(customer, product_name, price, amount, total)
+values(in_customer, _name, _price, in_amount, _total);
+select * from buy;
+end//
+delimiter ;
+
+call insert_buy(1, '홍길동', 3);
+
+
+
+//한번에 st_point 설정하기.
+drop procedure if exists update_stpoint;
+delimiter //
+create procedure update_stpoint()
+begin
+update student set st_point = (
+select sum(su_point) from subject
+join course on su_num = co_su_num
+join attend on at_co_num = co_num
+where at_repetition='n' and at_st_num = st_num
+group by at_st_num);
+select * from student;
+end//
+delimiter ;
+
+call update_stpoint();
+
+drop procedure if exists update_point;
+delimiter //
+create procedure update_point(
+in in_st_num int
+)
+begin
+declare _sum int default 0;
+set _sum = (
+select sum(su_point) from attend
+join course on at_co_num = co_num
+join subject on su_num = co_su_num
+join student on st_num = at_st_num
+where at_repetition='n' and st_num = in_st_num);
+
+update student set st_point = _sum
+where st_num = in_st_num;
+select * from student;
+end//
+delimiter ;
+call update_point(2020456001);
+

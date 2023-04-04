@@ -1,0 +1,17 @@
+package day17;
+
+import java.io.File;
+
+public class FileObjectEx01 {
+
+	public static void main(String[] args) {
+		// 파일이 가지고 있는 정보를 출력.
+		// D:\_java_workspace\java_workspace\out.txt
+		File f = new File("D:\\_java_workspace\\java_workspace\\out.txt");
+		String fileName = f.getName();
+		System.out.println(fileName);
+		
+
+	}
+
+}

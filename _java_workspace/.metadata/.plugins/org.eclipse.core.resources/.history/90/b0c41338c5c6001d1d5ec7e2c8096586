@@ -1,0 +1,25 @@
+package day17;
+
+import java.io.PrintWriter;
+
+public class PrintWriterEx01 {
+
+	public static void main(String[] args) {
+		/* PrintWriter : 개체의 형식화된 표현을 텍스트 출력 스트림으로 출력
+		 * */
+		//println, print, printf
+		
+		PrintWriter pw = new PrintWriter(System.out);
+		
+		String str = "Hello";
+		
+		pw.print(str);
+		pw.println();  //줄바꿈
+		pw.println(str);
+		pw.printf("%.2f", Math.PI);  //Math.PI : 3.14159...
+		
+		pw.close();
+
+	}
+
+}

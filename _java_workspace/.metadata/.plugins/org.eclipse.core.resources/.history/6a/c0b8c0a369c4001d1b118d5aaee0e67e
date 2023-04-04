@@ -1,0 +1,105 @@
+package day16;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Scanner;
+
+public class EnglishDictionary {
+//main 등록, 출력
+	public static void main(String[]args) {
+		Scanner scan = new Scanner(System.in);
+		Word w = new Word();
+		int menu = 0;
+		
+		do {
+		
+			System.out.println("--단어장--");
+			System.out.println("1.단어등록|2.단어출력|3.종료");
+			System.out.println("메뉴선택>");
+			menu = scan.nextInt();
+			
+			switch(menu) {
+			case 1: w.makeWord(scan); break;
+			case 2: w.printWord(); break;
+			case 3: break;
+			default:
+				System.out.println("잘못된 메뉴");
+			}
+		}while(menu !=3);
+		System.out.println("종료!!");
+		
+	}
+	
+	
+}
+
+
+class Word{
+	//hello : 안녕, 아침인사, 반가움, 비슷한말 hi
+	private Map<String, ArrayList<String>> words = new HashMap<>();
+	//private ArrayList<String> word = new ArrayList<>();
+	/* y를 입력하면 단어를 입력, n을 입력하면 종료
+	 * 단어가 이미 있다면 '이미 있는 단어입니다.' 등록 금지
+	 * 메서드명 : makeWord
+	 * */
+	public void makeWord(Scanner scan) {
+		char is = 'y';
+		char wIs = 'y';
+		a: while(is=='y') {
+			System.out.println("단어입력:");
+			String newWord = scan.next();
+			//word.add(newWord);
+			for(String s : words.keySet()) {
+				if(newWord.equals(s)) {
+					System.out.println("이미있는 단어입니다.");
+					System.out.println("다른 단어를 입력하세요(y/n)");
+					wIs = scan.next().charAt(0);
+					break a;
+				}
+			}
+			
+			System.out.println("의미입력:");
+			scan.nextLine();
+			String mean = scan.nextLine();
+			
+			ArrayList<String> meanList = new ArrayList<>();
+			meanList.add(mean);
+			System.out.println(newWord+"에 대한 뜻을 추가하시겠습니까?(y/n)");
+			is=scan.next().charAt(0);
+			if(is=='y') {
+				while(is=='y') {
+					System.out.println(newWord+"의 다른 의미:");
+					scan.nextLine();
+					mean = scan.nextLine();
+					meanList.add(mean);
+					System.out.println(newWord+"에 대한 뜻을 추가하시겠습니까?(y/n)");
+					is=scan.next().charAt(0);
+					if(!(is=='y' || is=='n')) {
+						System.out.println("잘못된 입력입니다.");
+					}
+				}
+				
+			}else {
+				System.out.println("입력종료");
+			}
+			words.put(newWord, meanList);
+			
+		}
+	}
+	
+	/* 단어 출력 메서드
+	 * 메서드명 : printWord
+	 * */
+	public void printWord() {
+		System.out.println("--단어출력--");
+		for(String s : words.keySet()) {
+			System.out.println(s);
+			System.out.println(words.get(s));
+			
+		}
+		System.out.println("------------");
+	}
+	
+	
+}

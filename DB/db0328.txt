@@ -1,0 +1,154 @@
+update test3 set addr = '서울특별시'
+where addr='서울시';
+
+update test3 set addr = replace(addr,'시','특별시')
+where addr='서울시';
+
+update test3 set dep=concat(dep,'학과')
+where right(dep, 2)<>'학과';
+
+alter table test3 modify column tel varchar(10);
+update test3 set tel = '미등록'
+where tel is null;
+
+select type_a, sum(sale_amount) as sum from product
+group by type_a order by sum desc;
+
+select month(register_date) as mon, sum(sale_amount) as sum
+from product group by mon order by mon;
+
+select date_format(register_date, '%y-%m') as mon, sum(sale_amount) as sum
+from product group by mon order by mon;
+
+select max(sum) from (
+select sum(sale_amount) as sum from product
+group by type_a ) as p;
+
+create database school;
+use school;
+create table student(
+std_num varchar(10) not null,
+std_name varchar(20) not null,
+std_major varchar(20),
+std_term int,
+std_point int,
+primary key(std_num));
+
+create table course(
+co_code varchar(12) not null,
+co_name varchar(20) not null,
+co_professor varchar(20),
+co_point int default 3,
+co_time int,
+co_timetable varchar(40),
+primary key(co_code));
+
+create table attend(
+at_num int not null auto_increment,
+at_std_num varchar(10),
+at_co_code varchar(12),
+at_year int,
+at_term int,
+at_mid int default 0,
+at_final int default 0,
+at_attend int default 0,
+at_hw int default 0,
+at_repetition varchar(1) default 'n',
+at_score varchar(4),
+primary key(at_num));
+
+Alter table attend add foreign key(at_std_num) 
+references student(std_num);
+Alter table attend add foreign key(at_co_code) 
+references course(co_code);
+
+insert into student values
+('2019160123','전봉준','컴퓨터공학과',2,64),
+('2019456001','강길동','디자인',3,60),
+('2020123001','강나래','화학공학',1,21),
+('2020123020','박철수','화학공학',1,20),
+('2020160001','강철수','컴퓨터공학',1,20),
+('2020160002','나영희','컴퓨터공학',1,19);
+
+
+insert into course values
+('20201ipc001','컴퓨터개론','유관순',2,2,'화1A,1B,2A,2B'),
+('20202ipc002','기초전기','이순신',3,4,'월1A,1B,2A목1A,1B,2A'),
+('20201msc001','대학수학기초','홍길동',3,3,'월1A,1B,2A수1A,1B,2A'),
+('20202msc002','프로그래밍일반','임꺽정',3,3,'월1A,1B,2A목1A,1B,2A');
+
+insert into attend(at_std_num, at_co_code) values
+('2020160001','20201msc001'),
+('2020160002','20201msc001'),
+('2019160123','20202msc002'),
+('2019456001','20202msc002'),
+('2020123001','20201ipc001'),
+('2020123020','20201ipc001'),
+('2019456001','20202ipc002'),
+('2019160123','20202ipc002'),
+('2020160001','20202msc002'),
+('2020160002','20202msc002'),
+('2019160123','20201msc001'),
+('2019456001','20201msc001'),
+('2020123001','20201msc001'),
+('2020123020','20201msc001'),
+('2019456001','20202msc002'),
+('2019160123','20202msc002');
+
+update attend set at_year = 2023;
+update attend set at_term = 2 where at_num in(17,18);
+
+at_mid=40, at_final=40, at_attend=10, at_hw=10  총 100점
+update attend set at_mid = 38, at_final=35, at_attend=10, at_hw=10
+where at_num =9;
+update attend set at_mid = 37, at_final=31, at_attend=8, at_hw=5
+where at_num =10;
+update attend set at_mid =23, at_final=25, at_attend=9, at_hw=9
+where at_num =11;
+update attend set at_mid = 39, at_final=35, at_attend=9, at_hw=8
+where at_num =12;
+update attend set at_mid = 25, at_final=23, at_attend=3, at_hw=1
+where at_num =13;
+update attend set at_mid = 40, at_final=38, at_attend=9, at_hw=7
+where at_num =14;
+update attend set at_mid = 35, at_final=30, at_attend=7, at_hw=6
+where at_num =15;
+update attend set at_mid = 26, at_final=35, at_attend=2, at_hw=7
+where at_num =16;
+
+update attend set at_score = 
+case 
+when (at_mid+at_final+at_attend+at_hw) >=90 then 'A'
+when (at_mid+at_final+at_attend+at_hw) >=80 then 'B'
+when (at_mid+at_final+at_attend+at_hw) >=70 then 'C'
+when (at_mid+at_final+at_attend+at_hw) >=60 then 'D'
+else 'F'
+end
+where at_term = 1;
+
+
+update attend set at_repetition = 
+if((at_score='F' or at_attend <= 3), 'y', 'n') 
+where at_term = 1;
+
+select a.at_std_num, s.std_name, a.at_score from attend a
+join student s
+on a.at_std_num = s.std_num
+where a.at_score='A';
+
+select a.at_std_num, s.std_name, a.at_repetition  from attend
+a join student s on a.at_std_num = s.std_num
+where a.at_repetition = 'y';
+
+select a.at_std_num, s.std_name, c.co_name, a.at_score from attend a
+join student s on a.at_std_num = s.std_num
+join course c on a.at_co_code = c.co_code
+where a.at_score = 'A';
+
+select co_name as '과목', sum(at_mid)as'중간합계', sum(at_final)as'기말',
+sum(at_attend)as'출석', sum(at_hw)as'과제' from attend
+join course on at_co_code = co_code
+group by at_co_code;
+
+
+

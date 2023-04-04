@@ -1,0 +1,39 @@
+package studentmanager;
+
+import java.util.Scanner;
+
+public class ProgramManager implements Program{
+	
+	//멤버변수 student class , count 변수
+
+	@Override
+	public void printStudent() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void insertStudent(Scanner scan) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void searchStudent(Scanner scan) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void registerSubject(Scanner scan) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void deleteSubject(Scanner scan) {
+		// TODO Auto-generated method stub
+		
+	}
+
+}

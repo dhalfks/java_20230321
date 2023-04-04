@@ -1,0 +1,22 @@
+package studentmanager;
+
+public class Student {
+
+	/* 학생클래스 : 한 학생의 정보를 나타내는 클래스 
+		- 학번, 이름, 주민번호, 학부, 학과, 수강과목s(과목클래스를 배열생성)
+		- 수강과목의 번지를 대신할 count 
+		- 메서드 
+		  - 수강과목 추가(배열이 다 찼다면 늘려주기)
+		  - 수강과목 삭제
+		- 생성자, getter/setter, 출력메서드(print) - 2가지 형태로
+	 * */
+	
+	//멤버변수
+	private String stdNum;
+	private String stdName;
+	private String registerNum;
+	private String faculty;
+	private String major;
+	private Subject[] subjectList; //subject 클래스를 배열로 선언.
+	private int subCount;
+}

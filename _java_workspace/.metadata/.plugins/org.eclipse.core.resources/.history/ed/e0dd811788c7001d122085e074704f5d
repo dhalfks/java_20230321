@@ -1,0 +1,58 @@
+package day18;
+
+class Bank{
+	//계좌의 돈
+	private int money = 10000;
+	
+	//입금
+	public void saveMoney(int save) {
+		int m = this.money;
+		
+		try {
+			Thread.sleep(3000); //3초 후
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		setMoney(m + save);
+		
+	}
+
+	//출금
+	public void minusMoney(int minus) {
+		
+		int m = this.money;
+		
+		try {
+			Thread.sleep(200);  //0.2초 후
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		setMoney(m-minus);
+	}
+	
+	
+	public int getMoney() {
+		return money;
+	}
+
+	public void setMoney(int money) {
+		this.money = money;
+	}
+	
+	
+	
+	
+}
+
+public class SyncMain {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+	}
+
+}

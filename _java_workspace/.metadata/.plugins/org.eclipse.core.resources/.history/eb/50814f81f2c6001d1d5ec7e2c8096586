@@ -1,0 +1,66 @@
+package day17;
+
+import java.util.ArrayList;
+import java.util.Scanner;
+
+import day15.Word;
+
+
+public class WordManager {
+
+	/* package day15 에서 생성한 Word 클래스 객체화해서 사용 
+	 * 단어장 프로그램 작성
+	 * 1.단어등록
+	 * 2.단어검색
+	 * 3.단어수정
+	 * 4.단어출력
+	 * 5.파일로 출력 
+	 * 6.단어삭제
+	 * 7.종료
+	 * */
+	private ArrayList<Word> list = new ArrayList<>();
+	
+	//메뉴출력
+	public void printMenu() {
+		System.out.println("--단어장 프로그램--");
+		System.out.println("1.단어등록|2.단어검색|3.단어수정");
+		System.out.println("4.단어출력|5.파일로출력|6.단어삭제|7.종료");
+		System.out.println("---------------------------------");
+		System.out.println("menu > ");
+	}
+	
+	//기본단어등록
+	public void addWord() {
+		list.add(new Word("hello","안녕"));
+		list.add(new Word("hi","안녕"));
+		list.add(new Word("apple","사과"));
+		list.add(new Word("orange","오렌지"));
+		list.add(new Word("banana","바나나"));
+	}
+	
+	//단어등록
+	public void insertWord(Scanner scan) {
+		
+	}
+	//단어검색
+	public void searchWord(Scanner scan) {
+		
+	}
+	//단어수정
+	public void modifyWord(Scanner scan) {
+		
+	}
+	//단어출력
+	public void printWord() {
+		
+	}
+	//단어 파일로 출력
+	public void fileWord() {
+		
+	}
+	//단어삭제
+	public void deleteWord(Scanner scan) {
+		
+	}
+	
+}

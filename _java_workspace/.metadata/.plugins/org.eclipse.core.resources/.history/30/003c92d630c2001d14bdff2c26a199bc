@@ -1,0 +1,8 @@
+package studentmanager;
+
+public class Subject {
+
+	/* 과목클래스 : 한 과목의 정보를 나타내는 클래스
+		- 과목코드, 과목명, 학점, 시수, 교수명, 학기, 분류, 수업시간표
+	 * */
+}

@@ -1,0 +1,19 @@
+package day16;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class StreamEx03 {
+
+	public static void main(String[] args) {
+		List<Student> std = new ArrayList<>();
+		std.add(new Student("홍길동",90));
+		std.add(new Student("홍길순",80));
+		std.add(new Student("강길동",60));
+		std.add(new Student("강길순",50));
+		std.add(new Student("이길동",70));
+		
+		std.stream().forEach(System.out::print);
+	}
+
+}

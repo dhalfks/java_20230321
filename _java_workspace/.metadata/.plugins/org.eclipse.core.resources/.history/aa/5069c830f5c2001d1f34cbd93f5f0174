@@ -1,0 +1,14 @@
+package product;
+
+import java.util.Scanner;
+
+public class ProductMain {
+
+	public static void main(String[] args) {
+		ProductManager pm = new ProductManager();
+		Scanner scan = new Scanner(System.in);
+		
+		scan.close();
+	}
+
+}

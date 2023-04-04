@@ -1,0 +1,23 @@
+package day15;
+
+import java.math.BigDecimal;
+
+public class BigDecimalEx {
+
+	public static void main(String[] args) {
+		// BigDecimal : java에서 숫자를 정밀하게 저장/표현하기 위한 클래스
+		// 돈, 소수점 정밀한 계산이 필요한 경우는 필수
+		// 단점. 느린속도
+		
+		//값을 초기화 하기 위해서는 문자열로 값을 넘겨줘야 함.
+		BigDecimal db = new BigDecimal("1000.1234");
+		BigDecimal db1 = new BigDecimal("1000.1234");
+		BigDecimal db2 = new BigDecimal("100");
+		
+		System.out.println(db);
+		//== 객체의 주소가 같은지 비교, 값이 같은지 비교를 위해서는 equals
+		System.out.println(db == db1);
+		System.out.println(db.equals(db1));
+	}
+
+}

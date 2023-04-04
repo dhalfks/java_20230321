@@ -1,0 +1,91 @@
+package studentmanager;
+
+import java.util.Scanner;
+
+public class ProgramManager implements Program{
+	
+	//멤버변수 student class , stdCount변수
+	private Student[] std = new Student[5];
+	private int stdCount;  //등록한 학생 카운트
+
+	@Override
+	public void printStudent() {
+		System.out.println("-----전체 학생 정보-----");
+		for(int i=0; i<stdCount; i++) {
+			std[i].stdPrint(); //학생정보만 출력
+			//printStudentOne(std[i]); //학생정보+수강정보
+			System.out.println("---------------------");
+		}
+		
+	}
+
+	@Override
+	public void insertStudent(Scanner scan) {
+		// 1명의 학생정보 값을 입력받아 객체를 생성한 후 std 배열에 등록
+		// 학번, 이름, 주민번호, 학부, 학과
+		System.out.println("--학생정보 입력--");
+		System.out.println("이름>");
+		String name = scan.next();
+		System.out.println("학번>");
+		String sNum = scan.next();
+		System.out.println("주민번호>");
+		String rNum = scan.next();
+		System.out.println("학부>");
+		String faculy = scan.next();
+		System.out.println("학과>");
+		String major = scan.next();
+		System.out.println("-------------");
+		
+		//입력받은 값으로 객체를 생성
+		Student s = new Student(sNum, name, rNum, faculy, major);
+		//배열이 다 찼다면 더 큰 배열을 생성 후 배열복사
+		if(stdCount == std.length) {
+			Student[] tmp = new Student[stdCount+5];//새배열
+			System.arraycopy(std, 0, tmp, 0, stdCount);
+			std = tmp;
+		}
+		
+		//std 배열에 등록
+		std[stdCount]=s;
+		stdCount++; //인원증가(배열 번지 증가)
+		
+	}
+
+	@Override
+	public void searchStudent(Scanner scan) {
+		// 검색할 학생이름을 입력받아 배열에서 탐색 후 있다면 
+		//학생정보+수강정보 출력 => printStudentOne() 호출
+		System.out.println("검색할 이름 입력>");
+		String searchName = scan.next();
+		
+		//전체 탐색
+		for(int i=0; i<stdCount; i++) {
+			if(std[i].getStdName().equals(searchName)) {
+				printStudentOne(std[i]);
+			}
+		}
+		System.out.println("검색한 이름이 없습니다.");
+		
+	}
+
+	@Override
+	public void registerSubject(Scanner scan) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void deleteSubject(Scanner scan) {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	//1명의 학생정보+수강정보를 같이 출력하고 싶을 때
+	public void printStudentOne(Student s) {
+		System.out.println("--학생정보--");
+		s.stdPrint();
+		System.out.println("--수강정보--");
+		s.subPrint();
+	}
+
+}

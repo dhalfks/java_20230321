@@ -1,0 +1,130 @@
+CHAR(10) : 고정길이 문자         
+VARCHAR(10) : 가변길이 문자    
+CURRENT_TIMESTAMP : 오늘날짜+시간
+NOW() : 날짜 + 시간
+
+숫자
+(정수)
+- BIT(m) : 1~64 BINARY 값을 지정
+- BOOL : 0 => FALSE, 1 =>TRUE   == TINYIINT(1)
+- TINYIINT(m) : 작은 수를 표현(1BYTE)  0~255 부호가 있다면 (-128 ~ 127)
+- SMALLINT(m) : 2BYTE 0~65536 (-32768 ~ 32767)
+- MEDIUMINT(m) : 3BYTE (0~16777215)
+- INT(m) : 4BYTE   => java int와 동일
+- BIGINT(m) : 8BYTE => java long과 동일
+
+(실수)
+- FLOAT(m,d) : 실수 표현 => 정밀도가 작은 부동소수점 표현
+- DOUBLE(m,d) :  정밀도가 큰 부동소수점 표현
+
+(문자)
+- CHAR(m) : 고정길이 문자열 (0~255)
+- VARCHAR(m) : 가변길이 문자열(0~65536)
+- TINYTEXT : 1BYTE 문자열 저장 가변길이
+- TINYBLOB : 바이너리데이터 저장용
+- TEXT : 2BYTE 가변길이
+- BLOB : 바이너리데이터 저장용
+- MIDIUMTEXT : 3BYTE
+- MIDIUMBLOB
+- LOGNTEXT: 4BYTE
+- LONGBLOB
+
+(날짜)
+- DATE : 날짜표현
+- DATETIME : 날짜+시간
+- TIMESTAMP : INSERT, UPDATE 연산에 유리한 형태
+- YEAR : 연도만
+- TIME : 시간만
+
+
+(제약조건)
+- NN : Not Null => 데이터 값으로 null이 오지 못하게 막아줌
+- UQ : Unique => 값이 중복될 수 없음 ex) 주민번호, 학번
+- AI : Auto Increment => 자동 증가 (정수만 체크 가능)
+- PK : Primary Key => 기본키 속성 추가 (NN이 같이 추가됨)
+
+- B : 바이너리 (2진값)
+- UN : Unsigned => 항상 0보다 크거나 같게 (음수를 못오게...)
+- ZF : Zero Fill => 숫자 앞에 0을 채울 경우 ex) 0001
+- G : Generated => 속성 자동 생성
+
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| performance_schema |
+| sakila             |
+| sys                |
+| test               |
+| world              |
++--------------------+
+7 rows in set (0.00 sec)
+
+mysql> use test;
+Database changed
+mysql> show tables;
++----------------+
+| Tables_in_test |
++----------------+
+| test1          |
++----------------+
+1 row in set (0.00 sec)
+mysql> select * from test1;
++----+--------+------+---------+
+| id | name   | age  | address |
++----+--------+------+---------+
+|  1 | 홍길동 |   25 | 서울시  |
+|  2 | 홍길순 |   23 | 서울시  |
+|  3 | 강기순 |   22 | 인천시  |
+|  4 | 고길동 |   40 | 안양시  |
+|  5 | 강감찬 |   45 | 안양시  |
++----+--------+------+---------+
+5 rows in set (0.00 sec)
+
+mysql> select * from test1 where address ='서울시';
++----+--------+------+---------+
+| id | name   | age  | address |
++----+--------+------+---------+
+|  1 | 홍길동 |   25 | 서울시  |
+|  2 | 홍길순 |   23 | 서울시  |
++----+--------+------+---------+
+2 rows in set (0.00 sec)
+
+create table student(
+num int not null,
+name varchar(30) not null,
+age int default 20,
+address varchar(45),
+major varchar(45),
+score int,
+primary key(num)
+);
+
+insert into student(num, name, age, address, mafor, score)
+values(1111,'홍길동',23,'seoul','computer',89);
+insert into student(num, name, age, address, mafor, score)
+values(2222,'강길순',24,'seoul','english',87);
+insert into student(num, name, age, address, mafor, score)
+values(3333,'이순신',22,'incheon','computer',57);
+insert into student(num, name, age, address, mafor, score)
+values(4444,'강감찬',23,'incheon','english',67);
+insert into student(num, name, age, address, mafor, score)
+values(5555,'유관순',21,'suwon','computer',97);
+
+insert into student(num, name, age, address, major, score)
+values(6666,'hong',23,'suwon','korea',89);
+insert into student(num, name, age, address, major, score)
+values(7777,'gilsung',24,'seoul','english',87);
+insert into student(num, name, age, address, major, score)
+values(8888,'leesunsin',22,'korea','computer',57);
+insert into student(num, name, age, address, major, score)
+values(9999,'kaung',23,'incheon','english',67);
+insert into student(num, name, age, address, major, score)
+values(0001,'sunny',21,'suwon','korea',97);
+
+
+
+

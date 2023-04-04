@@ -1,0 +1,46 @@
+use shop;  <- 선택이 안되면 table 생성이 안됨.
+create table buy(
+num int not null auto_increment,
+customer varchar(20),
+product_name varchar(45),
+price int default 0,
+amount int default 0,
+buy_date timestamp default current_timestamp,
+primary key(num));
+
+-- dafault 값을 반영하지 못했을 경우
+alter table buy modify column price int default 0;
+
+insert into buy(customer, product_name,price,amount)
+values('홍길동', '폴라티셔츠', 15000,3);
+
+insert into buy(customer, product_name,price,amount)
+select '홍길순', name, price, 3 from product where num=2;
+
+insert into buy(customer, product_name,price,amount)
+select '이순신', name, price, 1 from product where num=6;
+
+select case
+when @score>=80 then "상"
+when @score>=60 then "중"
+else "하"
+end;
+
+alter table student add column ranking varchar(10);
+
+update student set ranking = 
+if(score >=80,'A', if(score>=60,'B','C'));
+
+update student set ranking =
+case
+when score>=80 then 'A'
+when score>=60 then 'B'
+else 'C'
+end;
+
+insert into test3 values
+(400, '이순신','컴퓨터','서울시',1234),
+(500, '강감찬','경영','인천시',456),
+(600, '유관순','물리','인천시',789),
+(700, '강철수','컴퓨터','서울시',777),
+(800, '이영이','물리','원주시',null);

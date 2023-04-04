@@ -1,0 +1,55 @@
+package product;
+
+import java.util.Scanner;
+
+public class ProductMain {
+
+	public static void main(String[] args) {
+		ProductManager pm = new ProductManager();
+		Scanner scan = new Scanner(System.in);
+		int menu = 0;
+		pm.addMenu();
+		
+		do {
+			System.out.println();
+			System.out.println(">> 버튼 선택");
+			System.out.println("1.제품추가");
+			System.out.println("2.제품리스트보기");
+			System.out.println("3.제품수정");
+			System.out.println("4.제품삭제");
+			System.out.println("5.제품주문");
+			System.out.println("6.주문내역");
+			System.out.println("7.프로그램 종료");
+			System.out.println(">> 선택:");
+			
+			menu = scan.nextInt();
+			
+			switch(menu) {
+			case 1: pm.add(scan);
+				break;
+			case 2: 
+				pm.printProduct();  
+				break;
+			case 3:  pm.update(scan);
+				break;
+			case 4: pm.delete(scan);
+				break;
+			case 5:
+				System.out.println("주문할 제품명:");
+				String pick = scan.next();
+				System.out.println("수량:");
+				int count = scan.nextInt();
+				pm.orderPick(pick, count);  
+				break;
+			case 6: pm.printOrder();
+				break;
+			case 7: break;
+			default:
+				System.out.println("잘못된 메뉴~!!");
+			}
+		}while(menu!=7);
+		System.out.println("프로그램 종료~!!");
+		scan.close();
+	}
+
+}

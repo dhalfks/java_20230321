@@ -1,0 +1,15 @@
+package day17;
+
+public class BufferedReaderEx01 {
+
+	public static void main(String[] args) {
+		/* BufferedReader : 문자 보조 스트림
+		 * 라인단위로 읽기가 가능
+		 * 더이상 읽을 라인이 없을경우 null을 리턴
+		 * 보조스트림: 직접 읽고쓰는 기능이 없음. 
+		 * 보조스트림을 사용할 경우 생성자에 기반스트림을 매개변수로 포함.
+		 * */
+
+	}
+
+}

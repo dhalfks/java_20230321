@@ -1,0 +1,46 @@
+package product;
+
+import java.util.ArrayList;
+import java.util.Scanner;
+
+public class ProductManager implements ProductInterface {
+
+	private ArrayList<Product> menu = new ArrayList<>();
+	private ArrayList<Order> order = new ArrayList<>();
+	
+	public void addMenu() {
+		menu.add(new Product("햄버거",15000));
+		menu.add(new Product("피자",20000));
+		menu.add(new Product("음료",2000));
+		menu.add(new Product("과자",1000));
+		menu.add(new Product("사탕",500));
+	}
+	
+	@Override
+	public void add(Scanner scan) {
+		System.out.println("추가할 메뉴를 입력하세요.");
+		String menu = scan.next();
+		System.out.println("메뉴의 가격을 입력하세요.");
+		int price = scan.nextInt();
+		this.menu.add(new Product(menu, price));
+	}
+	@Override
+	public void printProduct() {
+		for(Product p : menu) {
+			System.out.println(p);
+		}
+		
+	}
+	@Override
+	public void orderPick(String name, int count) {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void printOrder() {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	
+}

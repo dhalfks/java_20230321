@@ -1,0 +1,32 @@
+package product;
+
+import java.util.ArrayList;
+
+public class ProductManager implements ProductInterface {
+
+	private ArrayList<Product> menu = new ArrayList<>();
+	private ArrayList<Order> order = new ArrayList<>();
+	
+	@Override
+	public void add() {
+		menu.add(new Product("햄버거",15000));
+		
+	}
+	@Override
+	public void printProduct() {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void orderPick(String name, String count) {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void printOrder() {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	
+}
